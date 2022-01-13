@@ -1,0 +1,85 @@
+<p-table #dt [value]="banks"  dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+            [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading"
+            [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [filterDelay]="0" [globalFilterFields]="['bank_name','bank_id','branch','ifsc']">
+            <ng-template pTemplate="caption">
+                <div class="table-header">
+                    Banks Search
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Global Search" />
+                    </span>
+                </div>
+                <!-- <div>
+                  City
+                  <span>
+                    <p-dropdown [options]="City" (onChange)="onCityChange($event.code)" styleClass="p-column-filter" placeholder="Select a Status" [showClear]="true">
+                      <ng-template let-option pTemplate="item">
+                          <span [class]="'customer-badge status-' + option.name">&#123;&#123;option.code&#125;&#125;</span>
+                      </ng-template>
+                  </p-dropdown>
+
+                  </span>
+                </div> -->
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 3rem"></th>
+                    <th pSortableColumn="bank_id">bank id <p-sortIcon field="bank_id"></p-sortIcon></th>
+                    <th pSortableColumn="bank_name">Name <p-sortIcon field="bank_name"></p-sortIcon></th>
+                    <th pSortableColumn="address">address <p-sortIcon field="address"></p-sortIcon></th>
+                    <th pSortableColumn="branch">branch <p-sortIcon field="branch"></p-sortIcon></th>
+                    <th pSortableColumn="city">city <p-sortIcon field="city"></p-sortIcon></th>
+                    <th pSortableColumn="district">district <p-sortIcon field="district"></p-sortIcon></th>
+                    <th pSortableColumn="ifsc">ifsc <p-sortIcon field="ifsc"></p-sortIcon></th>
+                    <th pSortableColumn="state">state <p-sortIcon field="state"></p-sortIcon></th>
+                    <th style="width: 8rem"></th>
+                </tr>
+               
+            </ng-template>
+            <ng-template pTemplate="body" let-Banks>
+                <tr class="p-selectable-row">
+                    <td>
+                        <p-tableCheckbox [value]="Banks"></p-tableCheckbox>
+                    </td> 
+                    <td>
+                        <span class="p-column-title">bank id</span>
+                        {{Banks.bank_id}}
+                    </td>
+                    <td>
+                        <span class="p-column-title">Name</span>
+                        <span class="image-text">{{Banks.bank_name}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">address</span>
+                        <span class="image-text">{{Banks.address}}</span>
+                    </td>
+                    <td>
+                        <span class="p-column-title">branch</span>
+                        {{Banks.branch}}
+                    </td>
+                    <td>
+                        <span class="p-column-title">city</span>
+                        <span>{{Banks.city}}</span>
+                    </td>
+
+                    <td>
+                      <span class="p-column-title">district</span>
+                      {{Banks.district}}
+                  </td>
+                  <td>
+                    <span class="p-column-title">ifsc</span>
+                    {{Banks.ifsc}}
+                </td>
+                <td>
+                  <span class="p-column-title">state</span>
+                  {{Banks.state}}
+              </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="8">No customers found.</td>
+                </tr>
+            </ng-template>
+        </p-table>
